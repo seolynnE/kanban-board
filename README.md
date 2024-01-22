@@ -2,7 +2,8 @@
 
 - Drag & Drop을 쉽게 구현 가능한 라이브러리.
 - 사용예시
-  ````<DragDropContext onDragEnd={}>
+  ```
+  <DragDropContext onDragEnd={}>
     <div>
         <Droppable droppableId="one">
             {() => (
@@ -12,8 +13,8 @@
             )}
         </Droppable>
     </div>
-  </DragDropContext>```
-  ````
+  </DragDropContext>
+  ```
 
 1. `DragDropContext` 사용 시 onDragEnd props child 필수
 2. `Droppable`사용 시 droppableId props, child 필수.
