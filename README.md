@@ -34,9 +34,11 @@
               <Draggable draggableId="first" index={1}>
                 {() => <li>two</li>}
               </Draggable>
+              {magic.placeholder}
             </ul>
           )}
         </Droppable>
 ```
 
 - li에 magic의 props들을 추가하면 모든게 li에 적용된다
+- placeholder는 리스트가 드래그 될 때 그 배경의 css(대게 height값)가 변하는 것을 방지해준다.
