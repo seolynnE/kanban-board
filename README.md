@@ -2,7 +2,10 @@
 
 - Drag & Drop을 쉽게 구현 가능한 라이브러리.
 - 사용예시
+
   ```
+  const onDragEnd=() => {};
+
   <DragDropContext onDragEnd={}>
     <div>
         <Droppable droppableId="one">
@@ -25,20 +28,39 @@
 ### beautiful-dnd에서 주는 props를 받아와야 한다.
 
 ```
-<Droppable droppableId="one">
-          {(magic) => (
-            <ul ref={magic.innerRef} {...magic.droppableProps}>
-              <Draggable draggableId="first" index={0}>
-                {(magic) => <li ref={magic.innerRef} {...magic.draggableProps} {...magic.dragHandleProps}>one</li>}
-              </Draggable>
-              <Draggable draggableId="first" index={1}>
-                {() => <li>two</li>}
-              </Draggable>
-              {magic.placeholder}
-            </ul>
-          )}
-        </Droppable>
+const [toDos, setToDos] = useRecoilState(toDoState);
+const onDragEnd = ({destination, source}:DropResoult) => {};
+
+
+          <Droppable droppableId="one">
+            {(magic) => (
+              <Board ref={magic.innerRef} {...magic.droppableProps}>
+                {toDos.map((toDo, index) => (
+                  <Draggable key={toDo} draggableId={toDo} index={index}>
+                    {(magic) => (
+                      <Card
+                        ref={magic.innerRef}
+                        {...magic.draggableProps}
+                        {...magic.dragHandleProps}
+                      >
+                        {toDo}
+                      </Card>
+                    )}
+                  </Draggable>
+                ))}
+                {magic.placeholder}
+              </Board>
+            )}
+          </Droppable>
 ```
 
 - li에 magic의 props들을 추가하면 모든게 li에 적용된다
 - placeholder는 리스트가 드래그 될 때 그 배경의 css(대게 height값)가 변하는 것을 방지해준다.
+
+### onDragEnd
+
+- result: DrogResult
+- result.draggabled: 드래그 되어있던 Draggable의 type
+- result.source: Draggable이 시작된 위치(location)
+- result.destination: Draggable이 끝난 위치(location).
+  만약 Draggable이 시작한 위치와 같은 위치로 돌아오면 이 destination의 값은 null이 될 것
