@@ -10,7 +10,7 @@ const Title = styled.h2`
 `;
 
 const Wraper = styled.div`
-  min-height: 200px;
+  min-height: 400px;
   padding: 20px 10px;
   border-radius: 5px;
   background-color: ${(props) => props.theme.boardColor};
@@ -22,7 +22,7 @@ interface IBoardProps {
 
 function Board({ toDos, boardId }: IBoardProps) {
   return (
-    <Droppable droppableId="one">
+    <Droppable droppableId={boardId}>
       {(magic) => (
         <Wraper ref={magic.innerRef} {...magic.droppableProps}>
           <Title>{boardId}</Title>
